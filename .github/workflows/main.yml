@@ -1,0 +1,24 @@
+name: HTML CI Pipeline
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Check for canvas.html
+      run: |
+        if [ -f "canvas.html" ]; then
+          echo "canvas.html exists ✅"
+        else
+          echo "canvas.html missing ❌"
+          exit 1
+        fi
